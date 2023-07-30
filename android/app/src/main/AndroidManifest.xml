@@ -2,8 +2,9 @@
     <application
         android:label="save_birds_caller"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
+            android:label="Save Birds Caller"
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
