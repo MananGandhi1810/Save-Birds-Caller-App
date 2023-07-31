@@ -26,10 +26,12 @@ class _CaseEditFormScreenState extends State<CaseEditFormScreen> {
   final TextEditingController _caseTypeController = TextEditingController();
   final TextEditingController _caseNotesController = TextEditingController();
   final TextEditingController _callerPhoneController = TextEditingController();
+  final TextEditingController _birdStatusController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    debugPrint(widget.birdCase.toString());
     _birdTypeController.value =
         TextEditingValue(text: widget.birdCase["birdName"]);
     _pickupAddressController.value =
@@ -40,6 +42,8 @@ class _CaseEditFormScreenState extends State<CaseEditFormScreen> {
         TextEditingValue(text: widget.birdCase["caseNotes"]);
     _callerPhoneController.value =
         TextEditingValue(text: widget.birdCase["callerPhone"]);
+    _birdStatusController.value =
+        TextEditingValue(text: widget.birdCase["birdStatus"] ?? "Unknown");
   }
 
   @override
@@ -184,6 +188,43 @@ class _CaseEditFormScreenState extends State<CaseEditFormScreen> {
                       },
                     ),
                     const Padding(padding: EdgeInsets.all(10)),
+                    const Text(
+                      "Case Status: ",
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.w600),
+                    ),
+                    DropdownButtonFormField(
+                      items: const [
+                        DropdownMenuItem(
+                          value: "Unknown",
+                          child: Text("Unknown"),
+                        ),
+                        DropdownMenuItem(
+                          value: "Completed by caller",
+                          child: Text("Completed by caller"),
+                        ),
+                        DropdownMenuItem(
+                          value: "Flew away",
+                          child: Text("Flew away"),
+                        ),
+                        DropdownMenuItem(
+                          value: "Dead",
+                          child: Text("Dead"),
+                        ),
+                        DropdownMenuItem(
+                          value: "Dropped at center",
+                          child: Text("Dropped at center"),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          _birdStatusController.value =
+                              TextEditingValue(text: value.toString());
+                        });
+                      },
+                      value: widget.birdCase["birdStatus"],
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
                     Center(
                       child: GFButton(
                         shape: GFButtonShape.pills,
@@ -195,6 +236,7 @@ class _CaseEditFormScreenState extends State<CaseEditFormScreen> {
                             "caseType": _caseTypeController.text,
                             "caseNotes": _caseNotesController.text,
                             "callerPhone": _callerPhoneController.text,
+                            "birdStatus": _birdStatusController.text,
                           });
                           if (_formKey.currentState!.validate()) {
                             debugPrint("Updating case");

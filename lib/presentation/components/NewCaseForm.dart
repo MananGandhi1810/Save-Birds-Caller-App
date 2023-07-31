@@ -206,6 +206,7 @@ class _NewCaseFormState extends State<NewCaseForm> {
                             debugPrint("Form validated");
                             _firestore.collection("Cases").add({
                               "birdName": _birdNameController.text,
+                              "caseStatus": "Unknown",
                               "pickupAddress": _pickupAddressController.text,
                               "pickupStatus": "Pending",
                               "caseType": _caseTypeController.text,

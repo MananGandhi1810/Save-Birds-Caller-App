@@ -34,21 +34,19 @@ class _BirdCaseCardState extends State<BirdCaseCard> {
             Text(
               "Bird: ${widget.birdCase['birdName']}",
               style:
-                  const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
-            widget.birdCase["callerName"] != ""
-                ? Text("Caller Name: ${widget.birdCase['callerName']}")
-                : Container(),
+            Text("Bird Status: ${widget.birdCase['birdStatus']}"),
             Text("Caller Number: ${widget.birdCase['callerPhone']}"),
             Text("Case Type: ${widget.birdCase['caseType']}"),
             widget.birdCase["volunteersGoing"] != 0
                 ? Text(
-                    "Volunteer Name: ${widget.birdCase['volunteer1']["name"]}${widget.birdCase['volunteer2'] != null ? ", ${widget.birdCase['volunteer2']["name"]}" : ""}",
-                    overflow: TextOverflow.ellipsis,
-                  )
+              "Volunteer Name: ${widget.birdCase['volunteer1']["name"]}${widget.birdCase['volunteer2'] != null ? ", ${widget.birdCase['volunteer2']["name"]}" : ""}",
+              overflow: TextOverflow.ellipsis,
+            )
                 : Container(),
             Text(
-              "Notes: ${widget.birdCase['caseNotes']}",
+              "Notes: ${widget.birdCase['caseNotes'] == "" ? "No notes" : widget.birdCase['caseNotes']}",
               overflow: TextOverflow.ellipsis,
             ),
             Text(
