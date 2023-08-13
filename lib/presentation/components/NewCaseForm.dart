@@ -204,9 +204,14 @@ class _NewCaseFormState extends State<NewCaseForm> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             debugPrint("Form validated");
+                            var lastCase = _firestore
+                                .collection("Cases")
+                                .orderBy("timestamp", descending: true)
+                                .limit(1);
                             _firestore.collection("Cases").add({
+                              "case_id": (await lastCase.get()).docs[0]["case_id"] + 1,
                               "birdName": _birdNameController.text,
-                              "caseStatus": "Unknown",
+                              "birdStatus": "Unknown",
                               "pickupAddress": _pickupAddressController.text,
                               "pickupStatus": "Pending",
                               "caseType": _caseTypeController.text,
